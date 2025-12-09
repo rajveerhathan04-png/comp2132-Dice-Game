@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game - Player vs Computer</title>
+    <link rel="stylesheet" href=" CSS/style.css">
+    <link rel="stylesheet" href=" Sacs/style.css">
+    <script src="JS/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-dice"></i> The Dice Game</h1>
+            <div class="authors">
+                <h2><i class="fas fa-user"></i> Author: Rajveer Kaur </h2>
+                <p class="project-info">COMP2132 Project - Dice Game</p>
+            </div>
+        </header>
+
+        <main class="game-container">
+            <div class="game-info">
+                <div class="round-counter">
+                    <h3><i class="fas fa-flag"></i> Round: <span id="round-number">1</span>/3</h3>
+                </div>
+                <div class="game-status">
+                    <p id="game-message">Click  on "Roll Dice" to start the game!</p>
+                </div>
+            </div>
+
+            <div class="players-container">
+                <!-- Player Section -->
+                <section class="player player-section" id="player-section">
+                    <div class="player-header">
+                        <h2><i class="fas fa-user"></i> PLAYER</h2>
+                        <div class="player-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="dice-container">
+                        <div class="dice" id="player-dice-1">
+                            <img src="images/dice1.jpg" alt="Player Dice 1" class="dice-image">
+                        </div>
+                        <div class="dice" id="player-dice-2">
+                            <img src="images/dice1.jpg" alt="Player Dice 2" class="dice-image">
+                        </div>
+                    </div>
+                    
+                    <div class="score-section">
+                        <div class="score-card">
+                            <h3><i class="fas fa-trophy"></i> Round Score</h3>
+                            <p class="score-value" id="player-round-score">0</p>
+                        </div>
+                        <div class="score-card total">
+                            <h3><i class="fas fa-chart-line"></i> Total Score</h3>
+                            <p class="score-value" id="player-total-score">0</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VS Separator -->
+                <div class="vs-section">
+                    <div class="vs-circle">
+                        <span>VS</span>
+                    </div>
+                </div>
+
+                <!-- Computer Section -->
+                <section class="player computer-section" id="computer-section">
+                    <div class="player-header">
+                        <h2><i class="fas fa-robot"></i> COMPUTER</h2>
+                        <div class="player-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="dice-container">
+                        <div class="dice" id="computer-dice-1">
+                            <img src="images/dice1.jpg" alt="Computer Dice 1" class="dice-image">
+                        </div>
+                        <div class="dice" id="computer-dice-2">
+                            <img src="images/dice1.jpg" alt="Computer Dice 2" class="dice-image">
+                        </div>
+                    </div>
+                    
+                    <div class="score-section">
+                        <div class="score-card">
+                            <h3><i class="fas fa-trophy"></i> Round Score</h3>
+                            <p class="score-value" id="computer-round-score">0</p>
+                        </div>
+                        <div class="score-card total">
+                            <h3><i class="fas fa-chart-line"></i> Total Score</h3>
+                            <p class="score-value" id="computer-total-score">0</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Rules Panel -->
+            <div class="rules-panel">
+                <h3><i class="fas fa-book"></i> Game Rules</h3>
+                <ul class="rules-list">
+                    <li><span class="rule-icon"><i class="fas fa-times-circle"></i></span> When die shows 1 → Score = 0</li>
+                    <li><span class="rule-icon"><i class="fas fa-gem"></i></span> The Matching pair → Score = (sum × 2)</li>
+                    <li><span class="rule-icon"><i class="fas fa-plus-circle"></i></span> Other combinations → Score = sum</li>
+                    <li><span class="rule-icon"><i class="fas fa-redo"></i></span> Only 3 rounds are allowed,  player who has highest score win the game.</li>
+                </ul>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="controls">
+                <button id="roll-btn" class="btn btn-primary">
+                    <i class="fas fa-dice"></i> Roll Dice
+                </button>
+                <button id="reset-btn" class="btn btn-secondary">
+                    <i class="fas fa-redo"></i> Reset Game
+                </button>
+                <button id="rules-toggle" class="btn btn-info">
+                    <i class="fas fa-question-circle"></i> Show Rules
+                </button>
+            </div>
+
+            <!-- Game History -->
+            <div class="history-panel">
+                <h3><i class="fas fa-history"></i> Game History</h3>
+                <div class="history-list" id="history-list">
+                    <p class="history-empty">No rolls yet. Start playing!</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>COMP2132 Web Development with javascript project |  The Dice Game Implementation</p>
+            <p class="copyright">© 2025 | The dice images are for educational purposes</p>
+        </footer>
+    </div>
+
+    <!-- Winner Modal -->
+    <div class="modal" id="winner-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-crown"></i> Game Over!</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="winner-result" id="winner-result">
+                    <!-- Winner content will be inserted here -->
+                </div>
+                <div class="final-scores">
+                    <div class="final-score">
+                        <h3>Player Final Score</h3>
+                        <p class="final-score-value" id="player-final-score">0</p>
+                    </div>
+                    <div class="final-score">
+                        <h3>Computer Final Score</h3>
+                        <p class="final-score-value" id="computer-final-score">0</p>
+                    </div>
+                </div>
+                <button id="play-again-btn" class="btn btn-primary">
+                    <i class="fas fa-play-circle"></i> Play Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
